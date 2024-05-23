@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#181818] text-white">
+    <form action="/short" method="post" class="flex flex-col items-center justify-center h-screen w-full gap-3 p-3">
+
+        {% if not uid %}
+        <h1 class="font-semibold text-3xl">URL Shortener</h1>
+        {% endif %}
+
+        <input type="url" placeholder="https://example.com" autofocus autocomplete="url" autocapitalize="off" spellcheck="false" name="url" id="url" required class="w-full min-w-[300px] max-w-[600px] h-[55px] rounded-lg border-none outline-none bg-[rgba(0,0,0,0.4)] p-3 text-lg"
+        {% if uid %}
+            value="{{ request.url_root }}{{ uid }}" readonly
+        {% endif %}>
+
+        {% if not uid %}
+        <button type="submit" class="w-[250px] h-[50px] rounded bg-blue-600">Generate short URL</button>
+        {% endif %}
+        
+        {% if uid %}
+        <a href="/" class="decoration-none"><button type="button" class="w-[250px] h-[50px] rounded bg-blue-600">Go back</button></a>
+        {% endif %}
+        
+    </form>
+</body>
+</html>
